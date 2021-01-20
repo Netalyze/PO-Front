@@ -8,10 +8,18 @@ import { environment } from 'src/environments/environment';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  public get isLoggedIn() {
+    return localStorage.getItem('currentUser') != null;
+  }
+
+  register(email: string, username: string, password: string,) {
+    return this.http.post(`${environment.apiUrl}/register`, { email, username, password });
+  }
 
   login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}`, { username, password})
+    return this.http.post<any>(`${environment.apiUrl}/login`, { username, password })
       .pipe(map(user => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         return user;
