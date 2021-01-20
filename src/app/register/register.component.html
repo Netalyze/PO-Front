@@ -1,1 +1,50 @@
-<p>register works!</p>
+<div class="grid container">
+    <div class="grid-item title">
+        Rejestracja
+    </div>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="grid-item">
+        <div class="form-group">
+            <label for="email">Adres e-mail</label>
+            <div *ngIf="submitted && form.email.errors?.required">
+                <p class="invalid-input-text">Adres e-mail jest wymagany</p>
+            </div>
+            <div *ngIf="submitted && form.email.errors?.email">
+                <p class="invalid-input-text">Proszę podać prawidłowy adres email</p>
+            </div>
+            <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
+        </div>
+
+        <div class="form-group">
+            <label for="username">Nazwa użytkownika</label>
+            <div *ngIf="submitted && form.username.errors?.required">
+                <p class="invalid-input-text">Nazwa użytkownika jest wymagana</p>
+            </div>
+            <div *ngIf="submitted && form.username.errors?.minlength">
+                <p class="invalid-input-text">Nazwa użytkownika musi składać się z min. 5 znaków</p>
+            </div>
+            <input type="text" formControlName="username" class="input-text" 
+                [ngClass]="{ 'is-invalid': submitted && form.username.errors }">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Hasło</label>
+            <div *ngIf="submitted && form.password.errors?.required">
+                <p class="invalid-input-text">Proszę podać hasło</p>
+            </div>
+            <input type="password" formControlName="password" class="input-text" 
+                [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+        </div>
+
+        <div class="form-group">
+            <div *ngIf="submitted && form.acceptTerms.errors?.required">
+                <p class="invalid-input-text">Proszę zaakceptować warunki regulaminu</p>
+            </div>
+            <input type="checkbox" formControlName="acceptTerms">
+            <label for="acceptTerms">Akceptuję <a href="#">regulamin</a></label>
+        </div>
+
+        <div class="form-group">
+            <button [disabled]="loading">Zarejestruj</button>
+        </div>
+    </form>
+</div>
