@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
 
@@ -15,12 +15,12 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
 
-  constructor(private formBuilder: FormBuilder, 
-              private auth: AuthService, 
-              private router: Router) { }
+  constructor(private formBuilder: FormBuilder,
+    private auth: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.formBuilder.group({
+    this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
@@ -37,12 +37,12 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.auth.login(this.form.username.value, this.form.password.value)
       .pipe(first())
-      .subscribe(data => {
+      .subscribe(() => {
         this.router.navigate(['/']);
-      }, 
-      err => {
-        this.loading = false;
-        console.log(err);
-      })
+      },
+        err => {
+          this.loading = false;
+          console.log(err);
+        })
   }
 }
