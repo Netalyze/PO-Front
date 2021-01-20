@@ -1,22 +1,33 @@
-<div>
-    <h2>Rejestracja</h2>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+<div class="grid container">
+    <div class="grid-item title">
+        Logowanie
+    </div>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="grid-item">
         <div class="form-group">
             <label for="username">Login</label>
-            <div *ngIf="submitted && form.username.errors?.required">Proszę podać poprawny login</div>
+            <div *ngIf="submitted && form.username.errors?.required">
+                <p class="invalid-input-text">Proszę podać odpowiednie hasło</p>
+            </div>
             <input type="text" formControlName="username"
-                [ngClass]="{ 'is-invalid': submitted && form.username.errors }">
+                [ngClass]="{ 'is-invalid': submitted && form.username.errors }" 
+                class="input-field">
         </div>
 
         <div class="form-group">
             <label for="password">Hasło</label>
-            <div *ngIf="submitted && form.password.errors?.required">Proszę podać hasło</div>
+            <div *ngIf="submitted && form.password.errors?.required">
+                <p class="invalid-input-text">Proszę podać odpowiednie hasło</p>
+            </div>
             <input type="password" formControlName="password"
-                [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+                [ngClass]="{ 'is-invalid': submitted && form.password.errors }"
+                class="input-field">
         </div>
 
         <div class="form-group">
             <button [disabled]="loading">Zaloguj</button>
         </div>
     </form>
+    <div class="singup-link">
+        Nie masz konta? <a href="#">Zarejestruj się!</a>
+    </div>
 </div>
