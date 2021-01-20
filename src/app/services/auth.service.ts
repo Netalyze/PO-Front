@@ -28,4 +28,9 @@ export class AuthService {
         return user;
       }));
   }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next('{}'); // Not sure
+  }
 }
