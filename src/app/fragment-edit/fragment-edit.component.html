@@ -1,1 +1,78 @@
-<p>fragment-edit works!</p>
+<div class="grid container">
+    <div class="grid-item title">
+        Dodawanie nowego odcinka
+    </div>
+    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="grid-item">
+        <!-- NAZWA ODCINKA -->
+        <div class="form-group">
+            <label for="name">Nazwa odcinka</label>
+            <div *ngIf="submitted && form.username.errors?.required">
+                <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+            </div>
+            <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && form.name.errors }"
+                class="input-field">
+        </div>
+
+        <!-- PUNKTY ZA WEJŚCIE -->
+        <div class="form-group">
+            <label for="scoringUp">Liczba punktów za wejście</label>
+            <div *ngIf="submitted && form.scoringUp.errors?.required">
+                <p class="invalid-input-text">Proszę podać l. punktów za wejście</p>
+            </div>
+            <input type="number" formControlName="scoringUp"
+                [ngClass]="{ 'is-invalid': submitted && form.scoreUp.errors }" class="input-field">
+        </div>
+
+        <!-- PUNKTY ZA ZEJŚCIE -->
+        <div class="form-group">
+            <label for="scoringDown">Liczba punktów za zejście</label>
+            <div *ngIf="submitted && form.scoringDown.errors?.required">
+                <p class="invalid-input-text">Proszę podać l. punktów za zejście</p>
+            </div>
+            <input type="number" formControlName="scoringDown"
+                [ngClass]="{ 'is-invalid': submitted && form.scoreDown.errors }" class="input-field">
+        </div>
+
+        <!-- PUNKT POCZĄTKOWY -->
+        <div class="form-group">
+            <label for="pointStart">Punkt początkowy</label>
+            <select name="points" id="points">
+                <option value="point1">Z dolin filipka</option>
+                <option value="point1">Śnieżka</option>
+            </select>
+        </div>
+
+        <!-- PUNKT KOŃCOWY -->
+        <div class="form-group">
+            <label for="pointEnd">Punkt końcowy</label>
+            <select name="points" id="points">
+                <option value="point1">Śnieżka</option>
+                <option value="point1">Z dolin filipka</option>
+            </select>
+        </div>
+
+        <!-- DŁUGOŚĆ -->
+        <div class="form-group">
+            <label for="length">Długość</label>
+            <div *ngIf="submitted && form.length.errors?.required">
+                <p class="invalid-input-text">Proszę podać długość odcinka</p>
+            </div>
+            <input type="number" formControlName="length" [ngClass]="{ 'is-invalid': submitted && form.length.errors }"
+                class="input-field">
+        </div>
+
+        <!-- TEREN GÓRSKI -->
+        <div class="form-group">
+            <label for="area">Teren górski</label>
+            <select name="area" id="area">
+                <option value="poin1">Tatry wysokie</option>
+                <option value="poin1">Tatry niskie</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <button [disabled]="loading">Anuluj</button>
+            <button [disabled]="loading">Dodaj odcinek</button>
+        </div>
+    </form>
+</div>
