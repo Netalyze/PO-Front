@@ -17,17 +17,17 @@
         </div>
 
         <div class="form-group">
-            <label for="username">Nazwa użytkownika</label>
-            <div *ngIf="submitted && form.username.errors?.required">
+            <label for="login">Nazwa użytkownika</label>
+            <div *ngIf="submitted && form.login.errors?.required">
                 <p class="invalid-input-text">Nazwa użytkownika jest wymagana</p>
             </div>
-            <div *ngIf="submitted && form.username.errors?.minlength">
+            <div *ngIf="submitted && form.login.errors?.minlength">
                 <p class="invalid-input-text">Nazwa użytkownika musi składać się z min. 5 znaków</p>
             </div>
             <input type="text" 
-                formControlName="username" 
+                formControlName="login" 
                 class="input-text" 
-                [ngClass]="{ 'is-invalid': submitted && form.username.errors }">
+                [ngClass]="{ 'is-invalid': submitted && form.login.errors }">
         </div>
 
         <div class="form-group">

@@ -4,13 +4,13 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="grid-item">
         <div class="form-group">
-            <label for="username">Nazwa użytkownika</label>
-            <div *ngIf="submitted && form.username.errors?.required">
+            <label for="login">Nazwa użytkownika</label>
+            <div *ngIf="submitted && form.login.errors?.required">
                 <p class="invalid-input-text">Proszę podać nazwę użytkownika</p>
             </div>
             <input type="text" 
-                formControlName="username"
-                [ngClass]="{ 'is-invalid': submitted && form.username.errors }" 
+                formControlName="login"
+                [ngClass]="{ 'is-invalid': submitted && form.login.errors }" 
                 class="input-field">
         </div>
 

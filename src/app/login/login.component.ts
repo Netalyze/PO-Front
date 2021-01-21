@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
-      username: ['', Validators.required],
+      login: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.loading = true;
-    this.auth.login(this.form.username.value, this.form.password.value)
+    this.auth.login(this.form.login.value, this.form.password.value)
       .pipe(first())
       .subscribe(() => {
         this.router.navigate(['/']);
