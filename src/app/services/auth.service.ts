@@ -14,12 +14,12 @@ export class AuthService {
     return localStorage.getItem('currentUser') != null;
   }
 
-  register(email: string, username: string, password: string,) {
-    return this.http.post(`${environment.apiUrl}/register`, { email, username, password });
+  register(email: string, login: string, password: string,) {
+    return this.http.post(`${environment.apiUrl}/register`, { email, login, password });
   }
 
-  login(username: string, password: string) {
-    return this.http.post<any>(`${environment.apiUrl}/login`, { username, password })
+  login(login: string, password: string) {
+    return this.http.post<any>(`${environment.apiUrl}/login`, { login, password })
       .pipe(map(user => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         return user;
