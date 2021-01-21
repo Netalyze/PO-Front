@@ -11,7 +11,9 @@
             <div *ngIf="submitted && form.email.errors?.email">
                 <p class="invalid-input-text">Proszę podać prawidłowy adres email</p>
             </div>
-            <input type="email" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form.email.errors }">
+            <input type="email" 
+                formControlName="email" 
+                [ngClass]="{ 'is-invalid': submitted && form.email.errors }" >
         </div>
 
         <div class="form-group">
@@ -22,7 +24,9 @@
             <div *ngIf="submitted && form.username.errors?.minlength">
                 <p class="invalid-input-text">Nazwa użytkownika musi składać się z min. 5 znaków</p>
             </div>
-            <input type="text" formControlName="username" class="input-text" 
+            <input type="text" 
+                formControlName="username" 
+                class="input-text" 
                 [ngClass]="{ 'is-invalid': submitted && form.username.errors }">
         </div>
 
@@ -31,7 +35,9 @@
             <div *ngIf="submitted && form.password.errors?.required">
                 <p class="invalid-input-text">Proszę podać hasło</p>
             </div>
-            <input type="password" formControlName="password" class="input-text" 
+            <input type="password" 
+                formControlName="password" 
+                class="input-text" 
                 [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
         </div>
 
