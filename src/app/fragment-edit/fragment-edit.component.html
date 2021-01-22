@@ -1,6 +1,6 @@
 <div class="grid container">
     <div class="grid-item title">
-        Dodawanie nowego odcinka
+        Edycja odcinka
     </div>
     <form [formGroup]="editForm" class="grid-item">
         <!-- NAZWA ODCINKA -->
@@ -64,7 +64,7 @@
 
         <!-- DŁUGOŚĆ -->
         <div class="form-group">
-            <label for="length">Długość</label>
+            <label for="length">Długość [m]</label>
             <div *ngIf="submitted && form.length.errors?.required">
                 <p class="invalid-input-text">Proszę podać długość odcinka</p>
             </div>
@@ -87,7 +87,7 @@
 
         <div class="form-group">
             <button (click)="cancel()">Anuluj</button>
-            <button [disabled]="loading" (click)="onSubmit()">Dodaj odcinek</button>
+            <button [disabled]="loading" (click)="onSubmit()">Edytuj odcinek</button>
         </div>
     </form>
 </div>

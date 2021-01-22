@@ -14,6 +14,7 @@ export class FragmentEditComponent implements OnInit {
   editForm!: FormGroup;
   loading = false;
   submitted = false;
+  fragment: any;
   points: any;
   areas: any;
 
@@ -35,7 +36,6 @@ export class FragmentEditComponent implements OnInit {
     this.fragmentsService.getAllPoints()
       .then((data: any) => {
         this.points = data.data;
-        console.log(this.points);
       })
       .catch(err => {
         // Dodanie errora do jakiegoś messageservice
@@ -50,7 +50,21 @@ export class FragmentEditComponent implements OnInit {
       .catch(err => {
         console.log('Error in fragment edit. Could not get areas');
         console.log(err);
-      })
+      });
+
+      this.fragmentsService.getFragment()
+      .then((data: any) => {
+        this.fragment = data.data;
+        this.editForm.setValue({
+          name: this.fragment.name,
+          scoringUp: this.fragment.scoring_up,
+          scoringDown: this.fragment.scoring_down,
+          pointStart: this.getPoint(this.fragment.point_start),
+          pointEnd: this.getPoint(this.fragment.point_end),
+          length: this.fragment.length,
+          area: this.getArea(this.fragment.area_id)
+        });
+      });
   }
 
   get form() { return this.editForm.controls; }
@@ -66,7 +80,7 @@ export class FragmentEditComponent implements OnInit {
       return;
     }
 
-    // this.loading = true;
+    this.loading = true;
     let requestBody = {
       'area_id': this.form.area.value,
       'point_start': this.form.pointStart.value,
@@ -79,13 +93,13 @@ export class FragmentEditComponent implements OnInit {
       'fragment_type': 'punktowany',
     };
 
-    this.fragmentsService.addFragment(requestBody)
+    this.fragmentsService.editFragment(requestBody)
       .pipe(first())
       .subscribe(() => {
-        console.log('Fragment added');
+        console.log('Fragment edited');
       }, 
       err => {
-        console.log('Error occured while adding fragment:');
+        console.log('Error occured while editing fragment:');
         console.log(err);
       });
   }
@@ -93,10 +107,22 @@ export class FragmentEditComponent implements OnInit {
   calcClimbLength(pointAID: number, pointBID: number) {
     let pointAAltitude = 0;
     let pointBAltitude = 0;
-    for (let item of this.points) {
-      if (item.id === Number(pointAID)) { pointAAltitude = item.altitude; }
-      else if (item.id === Number(pointBID)) { pointBAltitude = item.altitude; }
+    for (let point of this.points) {
+      if (point.id === Number(pointAID)) { pointAAltitude = point.altitude; }
+      else if (point.id === Number(pointBID)) { pointBAltitude = point.altitude; }
     }
     return Math.abs(pointAAltitude - pointBAltitude);  // Nie wiem jak z rozróżnieniem czy wchodzimy czy schodzimy dlatego abs
+  }
+
+  getPoint(pointID: number) {
+    for (let point of this.points) {
+      if (point.id === Number(pointID)) { return point.id; }
+    }
+  }
+
+  getArea(areaID: number) {
+    for (let area of this.areas) {
+      if (area.id === Number(areaID)) { return area.id; }
+    }
   }
 }

@@ -20,4 +20,12 @@ export class FragmentsService {
   addFragment(fragmentData: any) {
     return this.http.post(`${environment.apiUrl}/fragments/add`, fragmentData);
   }
+
+  async getFragment() { 
+    return await this.http.get(`${environment.apiUrl}/fragments/1`).toPromise();
+  }
+
+  editFragment(fragmentData: any) {
+    return this.http.post(`${environment.apiUrl}/fragments/edit/1`, fragmentData);
+  }
 }
