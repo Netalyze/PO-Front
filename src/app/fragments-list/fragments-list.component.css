@@ -71,3 +71,15 @@ input[type="text"], select {
     text-decoration: none;
     color: rgb(39, 134, 65);
 }
+
+button {
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: .5rem 2rem .5rem 2rem;
+    margin: .5rem 1rem .5rem 1rem;
+}
+
+button:active {
+    transform: scale(0.95);
+    outline: none;
+}

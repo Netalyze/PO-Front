@@ -73,7 +73,7 @@ export class FragmentEditComponent implements OnInit {
   get form() { return this.editForm.controls; }
 
   cancel() { 
-    this.router.navigate(['/']);
+    this.router.navigate(['/lista-odcinkow']);
     return;
   }
 
@@ -100,6 +100,7 @@ export class FragmentEditComponent implements OnInit {
       .pipe(first())
       .subscribe(() => {
         console.log('Fragment edited');
+        this.router.navigate(['/lista-odcinkow']);
       }, 
       err => {
         console.log('Error occured while editing fragment:');

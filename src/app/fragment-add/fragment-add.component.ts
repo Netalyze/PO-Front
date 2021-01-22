@@ -66,7 +66,7 @@ export class FragmentAddComponent implements OnInit {
       return;
     }
 
-    // this.loading = true;
+    this.loading = true;
     let requestBody = {
       'area_id': this.form.area.value,
       'point_start': this.form.pointStart.value,
@@ -83,6 +83,7 @@ export class FragmentAddComponent implements OnInit {
       .pipe(first())
       .subscribe(() => {
         console.log('Fragment added');
+        this.router.navigate(['/']);
       }, 
       err => {
         console.log('Error occured while adding fragment:');
