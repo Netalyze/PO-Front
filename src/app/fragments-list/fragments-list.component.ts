@@ -15,15 +15,18 @@ export class FragmentsListComponent implements OnInit {
   constructor(private fragmentsService: FragmentsService) { }
 
   ngOnInit(): void {
-    this.fragments = this.fragmentsService.getAllFragments()
+    this.fragmentsService.getAllFragments()
       .then((data: any) => {
         this.fragments = data.data;
       });
 
-    this.areas = this.fragmentsService.getAllAreas()
+    this.fragmentsService.getAllAreas()
       .then((data: any) => {
         this.areas = data.data;
+      })
+      .catch(err => {
+        console.log('Error in fragment edit. Could not get areas');
+        console.log(err);
       });
   }
-
 }
