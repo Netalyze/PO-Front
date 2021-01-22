@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FragmentsService } from '../services/fragments.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
 
 @Component({
@@ -11,6 +11,7 @@ import { first } from 'rxjs/operators';
 })
 export class FragmentEditComponent implements OnInit {
 
+  fragmentId!: number;
   editForm!: FormGroup;
   loading = false;
   submitted = false;
@@ -20,9 +21,11 @@ export class FragmentEditComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
               private fragmentsService: FragmentsService,
-              private router: Router) { }
+              private router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.fragmentId = +this.activatedRoute.snapshot.paramMap.get('id')!;
     this.editForm = this.formBuilder.group({
       name: ['', Validators.required],
       scoringUp: ['', Validators.required],
@@ -52,7 +55,7 @@ export class FragmentEditComponent implements OnInit {
         console.log(err);
       });
 
-      this.fragmentsService.getFragment()
+      this.fragmentsService.getFragment(this.fragmentId)
       .then((data: any) => {
         this.fragment = data.data;
         this.editForm.setValue({
@@ -93,7 +96,7 @@ export class FragmentEditComponent implements OnInit {
       'fragment_type': 'punktowany',
     };
 
-    this.fragmentsService.editFragment(requestBody)
+    this.fragmentsService.editFragment(requestBody, this.fragmentId)
       .pipe(first())
       .subscribe(() => {
         console.log('Fragment edited');

@@ -17,15 +17,19 @@ export class FragmentsService {
     return await this.http.get(`${environment.apiUrl}/areas`).toPromise();
   }
 
+  async getAllFragments() { 
+    return await this.http.get(`${environment.apiUrl}/fragments`).toPromise();
+  }
+
   addFragment(fragmentData: any) {
     return this.http.post(`${environment.apiUrl}/fragments/add`, fragmentData);
   }
 
-  async getFragment() { 
-    return await this.http.get(`${environment.apiUrl}/fragments/1`).toPromise();
+  async getFragment(id: number) { 
+    return await this.http.get(`${environment.apiUrl}/fragments/${id}`).toPromise();
   }
 
-  editFragment(fragmentData: any) {
+  editFragment(fragmentData: any, id: number) {
     return this.http.post(`${environment.apiUrl}/fragments/edit/1`, fragmentData);
   }
 }

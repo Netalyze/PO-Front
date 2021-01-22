@@ -1,0 +1,25 @@
+<div class="grid container">
+    <div class="title">
+        Modyfikacjia odcinka
+    </div>
+    <div class="prompt">Wybierz, z listy poniżej odcinek, który chcesz zmodyfikować</div>
+    <div class="search-bar">
+        <div>
+            <input type="text" placeholder="Wyszukaj odcinek">
+        </div>
+        <div>
+            <select name="area">
+                <option value="0">Wszystkie</option>
+                <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <ol class="fragments-list">
+            <!-- Rzuca błędem w konsoli chyba dlatego, żę renderuje view zanim przyjdą dane z requesta, ale je wyświetla -->
+            <li *ngFor="let fragment of fragments">
+                <a routerLink="/modyfikuj-odcinek/{{fragment.id}}">{{fragment.name}}</a>
+            </li>
+        </ol>
+    </div>
+</div>

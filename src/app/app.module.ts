@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { FragmentEditComponent } from './fragment-edit/fragment-edit.component';
 import { FragmentAddComponent } from './fragment-add/fragment-add.component';
 import { FragmentsMenuComponent } from './fragments-menu/fragments-menu.component';
+import { FragmentsListComponent } from './fragments-list/fragments-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FragmentsMenuComponent } from './fragments-menu/fragments-menu.componen
     HomeComponent,
     FragmentEditComponent,
     FragmentAddComponent,
-    FragmentsMenuComponent
+    FragmentsMenuComponent,
+    FragmentsListComponent
   ],
   imports: [
     BrowserModule,
