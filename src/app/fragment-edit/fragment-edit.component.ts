@@ -41,7 +41,6 @@ export class FragmentEditComponent implements OnInit {
         this.points = data.data;
       })
       .catch(err => {
-        // Dodanie errora do jakiegoś messageservice
         console.log('Error in fragment edit. Could not get poins');
         console.log(err);
       });
@@ -62,10 +61,10 @@ export class FragmentEditComponent implements OnInit {
           name: this.fragment.name,
           scoringUp: this.fragment.scoring_up,
           scoringDown: this.fragment.scoring_down,
-          pointStart: this.getPoint(this.fragment.point_start),
-          pointEnd: this.getPoint(this.fragment.point_end),
+          pointStart: this.fragment.point_start,
+          pointEnd: this.fragment.point_end,
           length: this.fragment.length,
-          area: this.getArea(this.fragment.area_id)
+          area: this.fragment.area_id
         });
       });
   }
@@ -116,17 +115,5 @@ export class FragmentEditComponent implements OnInit {
       else if (point.id === Number(pointBID)) { pointBAltitude = point.altitude; }
     }
     return Math.abs(pointAAltitude - pointBAltitude);  // Nie wiem jak z rozróżnieniem czy wchodzimy czy schodzimy dlatego abs
-  }
-
-  getPoint(pointID: number) {
-    for (let point of this.points) {
-      if (point.id === Number(pointID)) { return point.id; }
-    }
-  }
-
-  getArea(areaID: number) {
-    for (let area of this.areas) {
-      if (area.id === Number(areaID)) { return area.id; }
-    }
   }
 }
