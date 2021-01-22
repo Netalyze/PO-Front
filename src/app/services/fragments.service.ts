@@ -16,4 +16,8 @@ export class FragmentsService {
   async getAllAreas() { 
     return await this.http.get(`${environment.apiUrl}/areas`).toPromise();
   }
+
+  addFragment(fragmentData: any) {
+    return this.http.post(`${environment.apiUrl}/fragments/add`, fragmentData);
+  }
 }
