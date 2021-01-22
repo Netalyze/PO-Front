@@ -38,7 +38,6 @@ export class FragmentAddComponent implements OnInit {
         console.log(this.points);
       })
       .catch(err => {
-        // Dodanie errora do jakiegoś messageservice
         console.log('Error in fragment edit. Could not get poins');
         console.log(err);
       });
@@ -50,7 +49,7 @@ export class FragmentAddComponent implements OnInit {
       .catch(err => {
         console.log('Error in fragment edit. Could not get areas');
         console.log(err);
-      })
+      });
   }
 
   get form() { return this.addForm.controls; }

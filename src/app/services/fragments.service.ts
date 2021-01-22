@@ -10,7 +10,7 @@ export class FragmentsService {
   constructor(private http: HttpClient) { }
 
   async getAllPoints() {
-      return await this.http.get(`${environment.apiUrl}/points`).toPromise();
+    return await this.http.get(`${environment.apiUrl}/points`).toPromise();
   }
 
   async getAllAreas() { 
