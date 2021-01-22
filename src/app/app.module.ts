@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FragmentEditComponent } from './fragment-edit/fragment-edit.component';
+import { FragmentAddComponent } from './fragment-add/fragment-add.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FragmentEditComponent } from './fragment-edit/fragment-edit.component';
     RegisterComponent,
     LoginComponent,
     HomeComponent,
-    FragmentEditComponent
+    FragmentEditComponent,
+    FragmentAddComponent
   ],
   imports: [
     BrowserModule,
