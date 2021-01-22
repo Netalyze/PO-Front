@@ -61,6 +61,7 @@
 
 input[type="text"], input[type="number"] {
     margin-left: 2rem;
+    padding: .3rem;
     font-size: 1.25rem;
 }
 

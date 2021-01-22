@@ -59,7 +59,11 @@ export class FragmentEditComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form.pointEnd.value);
-    console.log(this.form.pointStart.value);
+    this.submitted = true;
+    if (this.editForm.invalid) {
+      return;
+    }
+
+    this.loading = true;
   }
 }

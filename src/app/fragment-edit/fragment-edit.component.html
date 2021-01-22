@@ -6,11 +6,12 @@
         <!-- NAZWA ODCINKA -->
         <div class="form-group">
             <label for="name">Nazwa odcinka</label>
-            <div *ngIf="submitted && form.username.errors?.required">
+            <div *ngIf="submitted && form.name.errors?.required">
                 <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
             </div>
-            <input type="text" formControlName="name" [ngClass]="{ 'is-invalid': submitted && form.name.errors }"
-                class="input-field">
+            <input type="text" 
+                formControlName="name" 
+                [ngClass]="{ 'is-invalid': submitted && form.name.errors }">
         </div>
 
         <!-- PUNKTY ZA WEJŚCIE -->
@@ -19,8 +20,9 @@
             <div *ngIf="submitted && form.scoringUp.errors?.required">
                 <p class="invalid-input-text">Proszę podać l. punktów za wejście</p>
             </div>
-            <input type="number" formControlName="scoringUp"
-                [ngClass]="{ 'is-invalid': submitted && form.scoreUp.errors }" class="input-field">
+            <input type="number" 
+                formControlName="scoringUp"
+                [ngClass]="{ 'is-invalid': submitted && form.scoringUp.errors }">
         </div>
 
         <!-- PUNKTY ZA ZEJŚCIE -->
@@ -29,8 +31,9 @@
             <div *ngIf="submitted && form.scoringDown.errors?.required">
                 <p class="invalid-input-text">Proszę podać l. punktów za zejście</p>
             </div>
-            <input type="number" formControlName="scoringDown"
-                [ngClass]="{ 'is-invalid': submitted && form.scoreDown.errors }" class="input-field">
+            <input type="number" 
+                formControlName="scoringDown"
+                [ngClass]="{ 'is-invalid': submitted && form.scoringDown.errors }">
         </div>
 
         <!-- PUNKT POCZĄTKOWY -->
@@ -39,7 +42,9 @@
             <div *ngIf="submitted && form.pointStart.errors?.required">
                 <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
             </div>
-            <select name="startPoints" formControlName="pointStart">
+            <select name="startPoints" 
+                formControlName="pointStart"
+                [ngClass]="{ 'is-invalid': submitted && form.pointStart.errors }">
                 <option *ngFor="let point of points" value="{{point.id}}">{{point.name}}</option>
             </select>
         </div>
@@ -50,7 +55,9 @@
             <div *ngIf="submitted && form.pointEnd.errors?.required">
                 <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
             </div>
-            <select name="endPoints" formControlName="pointEnd">
+            <select name="endPoints" 
+                formControlName="pointEnd"
+                [ngClass]="{ 'is-invalid': submitted && form.pointEnd.errors }">
                 <option *ngFor="let point of points" value={{point.id}}>{{point.name}}</option>
             </select>
         </div>
@@ -71,7 +78,9 @@
             <div *ngIf="submitted && form.area.errors?.required">
                 <p class="invalid-input-text">Proszę wybrać teren górski</p>
             </div>
-            <select name="area" formControlName="area">
+            <select name="area" 
+                formControlName="area"
+                [ngClass]="{ 'is-invalid': submitted && form.area.errors }">
                 <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
             </select>
         </div>
