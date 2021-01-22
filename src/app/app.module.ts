@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FragmentEditComponent } from './fragment-edit/fragment-edit.component';
 import { FragmentAddComponent } from './fragment-add/fragment-add.component';
+import { FragmentsMenuComponent } from './fragments-menu/fragments-menu.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { FragmentAddComponent } from './fragment-add/fragment-add.component';
     LoginComponent,
     HomeComponent,
     FragmentEditComponent,
-    FragmentAddComponent
+    FragmentAddComponent,
+    FragmentsMenuComponent
   ],
   imports: [
     BrowserModule,
