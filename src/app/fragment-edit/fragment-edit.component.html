@@ -2,7 +2,7 @@
     <div class="grid-item title">
         Dodawanie nowego odcinka
     </div>
-    <form [formGroup]="editForm" (ngSubmit)="onSubmit()" class="grid-item">
+    <form [formGroup]="editForm" class="grid-item">
         <!-- NAZWA ODCINKA -->
         <div class="form-group">
             <label for="name">Nazwa odcinka</label>
@@ -36,18 +36,22 @@
         <!-- PUNKT POCZĄTKOWY -->
         <div class="form-group">
             <label for="pointStart">Punkt początkowy</label>
-            <select name="points">
-                <option value="point1">Z dolin filipka</option>
-                <option value="point1">Śnieżka</option>
+            <div *ngIf="submitted && form.pointStart.errors?.required">
+                <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
+            </div>
+            <select name="startPoints" formControlName="pointStart">
+                <option *ngFor="let point of points" value="{{point.id}}">{{point.name}}</option>
             </select>
         </div>
 
         <!-- PUNKT KOŃCOWY -->
         <div class="form-group">
             <label for="pointEnd">Punkt końcowy</label>
-            <select name="points">
-                <option value="point1">Śnieżka</option>
-                <option value="point1">Z dolin filipka</option>
+            <div *ngIf="submitted && form.pointEnd.errors?.required">
+                <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
+            </div>
+            <select name="endPoints" formControlName="pointEnd">
+                <option *ngFor="let point of points" value={{point.id}}>{{point.name}}</option>
             </select>
         </div>
 
@@ -64,15 +68,17 @@
         <!-- TEREN GÓRSKI -->
         <div class="form-group">
             <label for="area">Teren górski</label>
-            <select name="area" id="area">
-                <option value="poin1">Tatry wysokie</option>
-                <option value="poin1">Tatry niskie</option>
+            <div *ngIf="submitted && form.area.errors?.required">
+                <p class="invalid-input-text">Proszę wybrać teren górski</p>
+            </div>
+            <select name="area" formControlName="area">
+                <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
             </select>
         </div>
 
         <div class="form-group">
-            <button [disabled]="loading">Anuluj</button>
-            <button [disabled]="loading">Dodaj odcinek</button>
+            <button (click)="cancel()">Anuluj</button>
+            <button [disabled]="loading" (click)="onSubmit()">Dodaj odcinek</button>
         </div>
     </form>
 </div>

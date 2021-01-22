@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FragmentsService } from '../services/fragments.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fragment-edit',
@@ -11,8 +13,12 @@ export class FragmentEditComponent implements OnInit {
   editForm!: FormGroup;
   loading = false;
   submitted = false;
+  points: any;
+  areas: any;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, 
+              private fragmentsService: FragmentsService,
+              private router: Router) { }
 
   ngOnInit(): void {
     this.editForm = this.formBuilder.group({
@@ -24,11 +30,36 @@ export class FragmentEditComponent implements OnInit {
       length: ['', Validators.required],
       area: ['', Validators.required]
     });
+
+    this.fragmentsService.getAllPoints()
+      .then((data: any) => {
+        this.points = data.data;
+      })
+      .catch(err => {
+        // Dodanie errora do jakiegoś messageservice
+        console.log('Error in fragment edit. Could not get poins');
+        console.log(err);
+      });
+
+    this.fragmentsService.getAllAreas()
+      .then((data: any) => {
+        this.areas = data.data;
+      })
+      .catch(err => {
+        console.log('Error in fragment edit. Could not get areas');
+        console.log(err);
+      })
   }
 
   get form() { return this.editForm.controls; }
 
+  cancel() { 
+    this.router.navigate(['/']);
+    return;
+  }
+
   onSubmit() {
-    
+    console.log(this.form.pointEnd.value);
+    console.log(this.form.pointStart.value);
   }
 }
