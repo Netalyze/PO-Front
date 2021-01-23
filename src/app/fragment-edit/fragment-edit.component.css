@@ -41,7 +41,14 @@
 .form-group {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding: 1rem 2rem 1rem 2rem;
+}
+
+.error-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -60,7 +67,6 @@
 }
 
 input[type="text"], input[type="number"] {
-    margin-left: 2rem;
     padding: .3rem;
     font-size: 1.25rem;
 }
@@ -76,6 +82,7 @@ select {
 }
 
 label {
+    margin-right: 1rem;
     font-size: 1.4rem;
 }
 
