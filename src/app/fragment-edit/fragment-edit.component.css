@@ -1,25 +1,18 @@
 .grid {
     display: grid;
-    max-width: 1024px;
+    max-width: 768px;
     grid-template-columns: 100%; /* rozmiar kolumny */
     margin-left: 1rem;
     margin-right: 1rem;
     margin-top: 5rem;
-    align-items: center;
+    text-align: center;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
     .grid {
         margin-left: auto;
         margin-right: auto;
-        grid-template-columns: repeat(2, 1fr);
     }
-}
-
-.header {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
 }
 
 .is-invalid {
@@ -41,7 +34,7 @@
 }
 
 .title {
-    font-size: 4rem;
+    font-size: 3rem;
     line-height: 100px;
 }
 
@@ -49,17 +42,6 @@
     display: flex;
     justify-content: space-between;
     padding: 1rem 2rem 1rem 2rem;
-}
-
-.left-group {
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-}
-
-.right-group {
-    border: 1px solid black;
-    padding: 1rem;
-    margin: 4.5rem 1.5rem 1.5rem 1.5rem;
 }
 
 @media screen and (max-width: 768px) {
