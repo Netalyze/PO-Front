@@ -14,6 +14,11 @@ export class AuthService {
     return localStorage.getItem('currentUser') != null;
   }
 
+  public get role() { 
+    const role = JSON.parse(localStorage.getItem('currentUser')!);
+    return role.user.role;
+  }
+
   register(email: string, login: string, password: string,) {
     return this.http.post(`${environment.apiUrl}/register`, { email, login, password });
   }
