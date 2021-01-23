@@ -79,6 +79,11 @@ a {
     cursor: pointer;
 }
 
+.bx-log-out, .bx-user-circle {
+    font-size: 1.5rem;
+    margin-top: -2px;
+    color: black;
+}
 
 .show {
     right: 0;

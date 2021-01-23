@@ -23,4 +23,7 @@ export class NavbarComponent implements OnInit {
     this.menuVisible = !this.menuVisible;
   }
 
+  logoutUser() {
+    this.auth.logout;
+  }
 }
