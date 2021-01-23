@@ -7,6 +7,7 @@ import { HomeComponent } from './home/home.component';
 import { FragmentAddComponent } from './fragment-add/fragment-add.component';
 import { FragmentEditComponent } from './fragment-edit/fragment-edit.component';
 import { FragmentsListComponent } from './fragments-list/fragments-list.component';
+import { TripSubmitComponent } from './trip-submit/trip-submit.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthguardService] },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'dodaj-odcinek', component: FragmentAddComponent },
   { path: 'modyfikuj-odcinek/:id', component: FragmentEditComponent },
   { path: 'lista-odcinkow', component: FragmentsListComponent },
+  { path: 'wyslij-wycieczke', component: TripSubmitComponent },
 
   { path: '**', redirectTo: ''}
 ];

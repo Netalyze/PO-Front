@@ -1,0 +1,30 @@
+<div class="grid container">
+    <div class="grid-item title">
+        Zweryfikuj wycieczkę
+    </div>
+    <form [formGroup]="tripSubmitForm">
+        <div class="form-group">
+            <label for="trip">Pokonana wycieczka</label>
+            <select name="trip" formControlName="tripId">
+                <option value="" selected disabled hidden>Wybierz wycieczkę...</option>
+                <option *ngFor="let trip of trips">
+                    {{trip.id}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="comment">Komentarz (opcjonalny)</label>
+            <textarea placeholder="Twój komentarz..." 
+            maxlength="200" 
+            rows="4"
+            formControlName="comment"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="proof">Dowody</label>
+            <div class="dropzone">
+                <input type="file" #fileDrop id="fileDrop" multiple />
+                <h4>Przeciągnij pliki...</h4>
+            </div>
+        </div>
+    </form>
+</div>
