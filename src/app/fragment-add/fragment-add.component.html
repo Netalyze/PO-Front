@@ -6,83 +6,97 @@
         <!-- NAZWA ODCINKA -->
         <div class="form-group">
             <label for="name">Nazwa odcinka</label>
-            <div *ngIf="submitted && form.name.errors?.required">
-                <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+            <div class="error-group">
+                <div *ngIf="submitted && form.name.errors?.required">
+                    <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                </div>
+                <input type="text" 
+                    formControlName="name" 
+                    [ngClass]="{ 'is-invalid': submitted && form.name.errors }">
             </div>
-            <input type="text" 
-                formControlName="name" 
-                [ngClass]="{ 'is-invalid': submitted && form.name.errors }">
         </div>
 
         <!-- PUNKTY ZA WEJŚCIE -->
         <div class="form-group">
             <label for="scoringUp">Liczba punktów za wejście</label>
-            <div *ngIf="submitted && form.scoringUp.errors?.required">
-                <p class="invalid-input-text">Proszę podać l. punktów za wejście</p>
+            <div class="error-group">
+                <div *ngIf="submitted && form.scoringUp.errors?.required">
+                    <p class="invalid-input-text">Proszę podać l. punktów za wejście</p>
+                </div>
+                <input type="number" 
+                    formControlName="scoringUp"
+                    [ngClass]="{ 'is-invalid': submitted && form.scoringUp.errors }">
             </div>
-            <input type="number" 
-                formControlName="scoringUp"
-                [ngClass]="{ 'is-invalid': submitted && form.scoringUp.errors }">
         </div>
 
         <!-- PUNKTY ZA ZEJŚCIE -->
         <div class="form-group">
             <label for="scoringDown">Liczba punktów za zejście</label>
-            <div *ngIf="submitted && form.scoringDown.errors?.required">
-                <p class="invalid-input-text">Proszę podać l. punktów za zejście</p>
+            <div class="error-group">
+                <div *ngIf="submitted && form.scoringDown.errors?.required">
+                    <p class="invalid-input-text">Proszę podać l. punktów za zejście</p>
+                </div>
+                <input type="number" 
+                    formControlName="scoringDown"
+                    [ngClass]="{ 'is-invalid': submitted && form.scoringDown.errors }">
             </div>
-            <input type="number" 
-                formControlName="scoringDown"
-                [ngClass]="{ 'is-invalid': submitted && form.scoringDown.errors }">
         </div>
 
         <!-- PUNKT POCZĄTKOWY -->
         <div class="form-group">
             <label for="pointStart">Punkt początkowy</label>
-            <div *ngIf="submitted && form.pointStart.errors?.required">
-                <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
+            <div class="error-group">
+                <div *ngIf="submitted && form.pointStart.errors?.required">
+                    <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
+                </div>
+                <select name="startPoints" 
+                    formControlName="pointStart"
+                    [ngClass]="{ 'is-invalid': submitted && form.pointStart.errors }">
+                    <option *ngFor="let point of points" value="{{point.id}}">{{point.name}}</option>
+                </select>
             </div>
-            <select name="startPoints" 
-                formControlName="pointStart"
-                [ngClass]="{ 'is-invalid': submitted && form.pointStart.errors }">
-                <option *ngFor="let point of points" value="{{point.id}}">{{point.name}}</option>
-            </select>
         </div>
 
         <!-- PUNKT KOŃCOWY -->
         <div class="form-group">
             <label for="pointEnd">Punkt końcowy</label>
-            <div *ngIf="submitted && form.pointEnd.errors?.required">
-                <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
+            <div class="error-group">
+                <div *ngIf="submitted && form.pointEnd.errors?.required">
+                    <p class="invalid-input-text">Proszę wybrać punkt początkowy</p>
+                </div>
+                <select name="endPoints" 
+                    formControlName="pointEnd"
+                    [ngClass]="{ 'is-invalid': submitted && form.pointEnd.errors }">
+                    <option *ngFor="let point of points" value={{point.id}}>{{point.name}}</option>
+                </select>
             </div>
-            <select name="endPoints" 
-                formControlName="pointEnd"
-                [ngClass]="{ 'is-invalid': submitted && form.pointEnd.errors }">
-                <option *ngFor="let point of points" value={{point.id}}>{{point.name}}</option>
-            </select>
         </div>
 
         <!-- DŁUGOŚĆ -->
         <div class="form-group">
             <label for="length">Długość</label>
-            <div *ngIf="submitted && form.length.errors?.required">
-                <p class="invalid-input-text">Proszę podać długość odcinka</p>
+            <div class="error-group">
+                <div *ngIf="submitted && form.length.errors?.required">
+                    <p class="invalid-input-text">Proszę podać długość odcinka</p>
+                </div>
+                <input type="number" formControlName="length" [ngClass]="{ 'is-invalid': submitted && form.length.errors }"
+                    class="input-field">
             </div>
-            <input type="number" formControlName="length" [ngClass]="{ 'is-invalid': submitted && form.length.errors }"
-                class="input-field">
         </div>
 
         <!-- TEREN GÓRSKI -->
         <div class="form-group">
             <label for="area">Teren górski</label>
-            <div *ngIf="submitted && form.area.errors?.required">
-                <p class="invalid-input-text">Proszę wybrać teren górski</p>
+            <div class="error-group">
+                <div *ngIf="submitted && form.area.errors?.required">
+                    <p class="invalid-input-text">Proszę wybrać teren górski</p>
+                </div>
+                <select name="area" 
+                    formControlName="area"
+                    [ngClass]="{ 'is-invalid': submitted && form.area.errors }">
+                    <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
+                </select>
             </div>
-            <select name="area" 
-                formControlName="area"
-                [ngClass]="{ 'is-invalid': submitted && form.area.errors }">
-                <option *ngFor="let area of areas" value="{{area.id}}">{{area.name}}</option>
-            </select>
         </div>
 
         <div class="form-group">

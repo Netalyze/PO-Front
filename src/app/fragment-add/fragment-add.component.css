@@ -34,14 +34,21 @@
 }
 
 .title {
-    font-size: 4rem;
+    font-size: 3rem;
     line-height: 100px;
 }
 
 .form-group {
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
     padding: 1rem 2rem 1rem 2rem;
+}
+
+.error-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
@@ -60,7 +67,7 @@
 }
 
 input[type="text"], input[type="number"] {
-    margin-left: 2rem;
+    /* margin-left: 2rem; */
     padding: .3rem;
     font-size: 1.25rem;
 }
@@ -77,11 +84,12 @@ select {
 
 label {
     font-size: 1.4rem;
+    margin-right: 1rem;
 }
 
 button {
     cursor: pointer;
-    font-size: 1.75rem;
+    font-size: 1.5rem;
     padding: .5rem 2rem .5rem 2rem;
     margin-top: .5rem;
     margin-bottom: .5rem;
