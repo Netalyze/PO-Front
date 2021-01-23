@@ -13,6 +13,7 @@ import { FragmentAddComponent } from './fragment-add/fragment-add.component';
 import { FragmentsMenuComponent } from './fragments-menu/fragments-menu.component';
 import { FragmentsListComponent } from './fragments-list/fragments-list.component';
 import { TripSubmitComponent } from './trip-submit/trip-submit.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { TripSubmitComponent } from './trip-submit/trip-submit.component';
     FragmentAddComponent,
     FragmentsMenuComponent,
     FragmentsListComponent,
-    TripSubmitComponent
+    TripSubmitComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,26 @@
+<header *ngIf="userLogged" class="header">
+    <nav class="nav grid">
+        <div>
+            <a routerLink="/" class="nav-logo">SZLAKOWNIK</a>
+        </div>
+
+        <div class="nav-menu" id="navmenu" [ngClass]="menuVisible ? 'show' : 'hide'">
+            <ul class="nav-list" *ngIf="role === 'Tourist'">
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Stwórz wycieczkę</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Historia wycieczek</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Twoja odznaka</a></li>
+                <li class="nav-item"><a routerLink="/wyslij-wycieczke" class="nav-link" (click)="itemSelected()">Złóż wniosek</a></li>
+            </ul>
+            <ul class="nav-list" *ngIf="role === 'Moderator'">
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Stwórz wycieczkę</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Historia wycieczek</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Twoja odznaka</a></li>
+                <li class="nav-item"><a routerLink="/wyslij-wycieczke" class="nav-link" (click)="itemSelected()">Złóż wniosek</a></li>
+            </ul>
+        </div>
+
+        <div class="nav-toggle" id="navtoggle" (click)="itemSelected()">
+            <i class="bx bx-menu"></i>
+        </div>
+    </nav>
+</header>
