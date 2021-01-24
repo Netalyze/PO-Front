@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { FragmentEditComponent } from './fragment-edit/fragment-edit.component';
 import { FragmentAddComponent } from './fragment-add/fragment-add.component';
@@ -15,6 +15,8 @@ import { FragmentsListComponent } from './fragments-list/fragments-list.componen
 import { TripSubmitComponent } from './trip-submit/trip-submit.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DndDirective } from './directives/dnd.directive';
+import { CreateTripComponent } from './create-trip/create-trip.component';
+import { AuthInterceptor } from './services/token-interceptor';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { DndDirective } from './directives/dnd.directive';
     FragmentsListComponent,
     TripSubmitComponent,
     NavbarComponent,
-    DndDirective
+    DndDirective,
+    CreateTripComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,11 @@ import { DndDirective } from './directives/dnd.directive';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

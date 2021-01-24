@@ -17,12 +17,17 @@ export class AuthService {
 
   public get role() { 
     const role = JSON.parse(localStorage.getItem('currentUser')!);
-    return role.user.role;
+    if (role != null) 
+      return role.user.role;
+    else return  null;
   }
 
   public get token() { 
     const user = JSON.parse(localStorage.getItem('currentUser')!);
-    return user.access_token;
+    if (user != null) {
+      return user.access_token;
+    }
+    else return null;
   }
 
   register(email: string, login: string, password: string,) {

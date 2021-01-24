@@ -1,0 +1,125 @@
+<div class="grid container">
+    <div class="grid-item title">
+        Stwórz wycieczkę
+    </div>
+    <form [formGroup]="tripCreateForm" class="grid-item">
+        <div class="inner-container">
+            <div>
+                <div class="form-group">
+                    <label for="name">Nazwa</label>
+                    <div class="error-group">
+                        <div *ngIf="submitted && form.name.errors?.required">
+                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        </div>
+                        <input type="text" 
+                            formControlName="name" >
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <label for="startDate">Data rozpoczęcia</label>
+                    <div class="error-group">
+                        <div *ngIf="submitted && form.name.errors?.required">
+                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        </div>
+                        <input type="date" name="startDate"
+                            formControlName="startDate" >
+                    </div>
+                </div>
+        
+                <div class="form-group">
+                    <label for="endDate">Data zakończenia</label>
+                    <div class="error-group">
+                        <div *ngIf="submitted && form.name.errors?.required">
+                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        </div>
+                        <input type="date" name="endDate"
+                            formControlName="endDate" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mountainRange">Pasmo górskie</label>
+                    <div class="error-group">
+                        <div *ngIf="submitted && form.name.errors?.required">
+                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        </div>
+                        <select name="mountainRange" 
+                        formControlName="mountainRange" 
+                        [ngClass]="{ 'is-invalid': submitted && form.trip.errors }">
+                            <option value="" selected disabled hidden>Wybierz pasmo...</option>
+                            <option *ngFor="let trip of trips">
+                                {{trip.id}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="startingPoint">Punkt początkowy</label>
+                    <div class="error-group">
+                        <div *ngIf="submitted && form.name.errors?.required">
+                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        </div>
+                        <select name="startingPoint" 
+                        formControlName="startingPoint" 
+                        [(ngModel)]="currentPoint"
+                        [ngClass]="{ 'is-invalid': submitted && form.trip.errors }">
+                            <option value="" selected disabled hidden>Wybierz punkt...</option>
+                            <option *ngFor="let trip of trips">
+                                {{trip.id}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <h2>Przebieg wycieczki</h2>
+                <div class="form-group">
+                    <textarea readonly="true"
+                    rows="4"
+                    >
+                </textarea>
+                </div>
+                <div class="form-group">
+                    <label for="currentAsEnd">Aktualny odcinek jako końcowy</label>
+                    <div class="error-group">
+                        <div *ngIf="submitted && form.name.errors?.required">
+                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        </div>
+                        <input type="checkbox" name="currentAsEnd"
+                            formControlName="currentAsEnd" >
+                    </div>
+                </div>
+            </div>
+            <div>
+                <p class="current-point">Aktualny punkt:  <span>{{currentPoint}}</span></p> 
+                <!-- Tutaj jeszcze przycisk 'Dodaj własny odcinek, ale nie wiem jak go wkomponować' -->
+                <div class="tab">
+                    <button class="tablinks"
+                    [ngClass]="{ 'active': activeTab == 1 }"
+                    >Odcinki punktowane</button>
+                    <button class="tablinks"
+                    [ngClass]="{ 'active': activeTab == 2 }"
+                    >Odcinki własne</button>
+                </div>
+                <div class="fragments">
+                    <div *ngFor="let item of fragments" class="fragment">
+                        <div class="fragment-content">{{item.name}}</div>
+                        <div class="fragment-content">{{item.pointsUp}}/{{item.pointsDown}}</div>
+                        <div class="fragment-content">{{item.length}}km</div>
+                        <div class="fragment-content"><i class='bx bx-plus-circle'></i></div>
+                    </div>
+                </div>
+                <div class="summary">
+                    <div class="trip-data">
+                        <div>
+                            Suma punktów: <span class="result">{{pointsTotal}}</span>
+                    </div>
+                        <div>
+                            Długość: <span class="result">{{lengthTotal}}</span>
+                        </div>
+                    </div>
+                    <div class="summary-btn"><button>Zapisz</button></div>
+                    <div class="summary-btn"><button>Anuluj</button></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
