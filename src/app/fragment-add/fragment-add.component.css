@@ -55,6 +55,7 @@
     .form-group {
         flex-direction: column;
         align-content: center;
+        align-items: center;
     }
 
     input[type="text"], input[type="number"] {
