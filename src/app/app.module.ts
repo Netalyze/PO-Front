@@ -14,6 +14,7 @@ import { FragmentsMenuComponent } from './fragments-menu/fragments-menu.componen
 import { FragmentsListComponent } from './fragments-list/fragments-list.component';
 import { TripSubmitComponent } from './trip-submit/trip-submit.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DndDirective } from './directives/dnd.directive';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     FragmentsMenuComponent,
     FragmentsListComponent,
     TripSubmitComponent,
-    NavbarComponent
+    NavbarComponent,
+    DndDirective
   ],
   imports: [
     BrowserModule,

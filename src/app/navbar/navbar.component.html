@@ -11,7 +11,7 @@
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Twoja odznaka</a></li>
                 <li class="nav-item"><a routerLink="/wyslij-wycieczke" class="nav-link" (click)="itemSelected()">Złóż wniosek</a></li>
                 <li class="nav-item"><a routerLink="/wyslij-wycieczke" class="nav-link"><i class='bx bx-user-circle'></i></a></li>
-                <li class="nav-item"><a routerLink="/wyslij-wycieczke" class="nav-link"><i class="bx bx-log-out"></i></a></li>
+                <li class="nav-item"><a (click)="logoutUser()" class="nav-link"><i class="bx bx-log-out"></i></a></li>
             </ul>
             <ul class="nav-list" *ngIf="role === 'Moderator'">
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Stwórz wycieczkę</a></li>

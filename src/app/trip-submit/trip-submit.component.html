@@ -5,12 +5,17 @@
     <form [formGroup]="tripSubmitForm">
         <div class="form-group">
             <label for="trip">Pokonana wycieczka</label>
-            <select name="trip" formControlName="tripId">
+            <select name="trip" 
+            formControlName="trip" 
+            [ngClass]="{ 'is-invalid': submitted && form.trip.errors }">
                 <option value="" selected disabled hidden>Wybierz wycieczkę...</option>
                 <option *ngFor="let trip of trips">
                     {{trip.id}}
                 </option>
             </select>
+            <div *ngIf="submitted && form.trip.errors?.required" class="error">
+                <small class="invalid-input-text">Proszę wybrać wycieczkę</small>
+            </div>
         </div>
         <div class="form-group">
             <label for="comment">Komentarz (opcjonalny)</label>
@@ -21,10 +26,42 @@
         </div>
         <div class="form-group">
             <label for="proof">Dowody</label>
-            <div class="dropzone">
-                <input type="file" #fileDrop id="fileDrop" multiple />
-                <h4>Przeciągnij pliki...</h4>
+            <div class="dropzone" [ngClass]="{ 'is-invalid': !fileSizeValid }">
+                <div class="drag-drop" appDnd (onFileDropped)="onFileDropped($event)">
+                    <input type="file" #fileDrop id="fileDrop" multiple (change)="fileBrowseHandler($event.target)"/>
+                </div>
+                <h4>Przeciągnij pliki lub...</h4>
+                <label for="fileDrop">Dodaj pliki</label>
             </div>
+            <div *ngIf="!fileSizeValid" class="error">
+                <small class="invalid-input-text">Maksymalna wielkość plików to 5MB</small>
+            </div>
+            <div class="files-list">
+                <div class="single-file" *ngFor="let file of files; let i = index">
+                  <div class="info">
+                    <h4 class="name">
+                      {{ file?.name }}
+                    </h4>
+                    <p class="size">
+                      {{ formatBytes(file?.size) }}
+                    </p>
+                  </div>
+                  <img src="assets/icons/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
+                </div>
+              </div>
+        </div>
+        <div class="form-group">
+            <label for="guide">Przodownik (opcjonalny)</label>
+            <select name="guide" formControlName="guide">
+                <option value="" selected disabled hidden>Wybierz przodownika...</option>
+                <option *ngFor="let trip of trips">
+                    {{trip.id}}
+                </option>
+            </select>
+        </div>
+        <div class="form-group buttons">
+            <button (click)="onSubmit()">Wyślij wniosek</button>
+            <button>Anuluj</button>
         </div>
     </form>
 </div>
