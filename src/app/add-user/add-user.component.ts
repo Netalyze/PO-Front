@@ -17,9 +17,9 @@ export class AddUserComponent implements OnInit {
   submitted = false;
   roles: any;
 
-  constructor(private formbuilder: FormBuilder, 
-              private auth: AuthService, 
-              private router: Router, 
+  constructor(private formbuilder: FormBuilder,
+              private auth: AuthService,
+              private router: Router,
               private userService: UserService) {
    }
 
@@ -38,12 +38,12 @@ export class AddUserComponent implements OnInit {
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
 
   get form() { return this.addForm.controls; }
 
-  cancel() { 
+  cancel() {
     this.router.navigate(['/uzytkownicy']);
     return;
   }
@@ -63,7 +63,7 @@ export class AddUserComponent implements OnInit {
           this.loading = false;
           console.log(err);
         }
-      )
+      );
   }
 }
 

@@ -54,7 +54,7 @@ export class FragmentAddComponent implements OnInit {
 
   get form() { return this.addForm.controls; }
 
-  cancel() { 
+  cancel() {
     this.router.navigate(['/zarzadzaj-odcinkami']);
     return;
   }
@@ -66,16 +66,16 @@ export class FragmentAddComponent implements OnInit {
     }
 
     this.loading = true;
-    let requestBody = {
-      'area_id': this.form.area.value,
-      'point_start': this.form.pointStart.value,
-      'point_end': this.form.pointEnd.value,
-      'name': this.form.name.value,
-      'length': this.form.length.value,
-      'scoring_up': this.form.scoringUp.value,
-      'scoring_down': this.form.scoringDown.value,
-      'climb_length': this.calcClimbLength(this.form.pointStart.value, this.form.pointEnd.value),
-      'fragment_type': 'punktowany',
+    const requestBody = {
+      area_id: this.form.area.value,
+      point_start: this.form.pointStart.value,
+      point_end: this.form.pointEnd.value,
+      name: this.form.name.value,
+      length: this.form.length.value,
+      scoring_up: this.form.scoringUp.value,
+      scoring_down: this.form.scoringDown.value,
+      climb_length: this.calcClimbLength(this.form.pointStart.value, this.form.pointEnd.value),
+      fragment_type: 'punktowany',
     };
 
     this.fragmentsService.addFragment(requestBody)
@@ -83,7 +83,7 @@ export class FragmentAddComponent implements OnInit {
       .subscribe(() => {
         console.log('Fragment added');
         this.router.navigate(['/']);
-      }, 
+      },
       err => {
         console.log('Error occured while adding fragment:');
         console.log(err);

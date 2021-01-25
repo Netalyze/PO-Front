@@ -4,9 +4,9 @@
     </div>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="grid-item">
         <div class="form-group">
-            <label for="login">Nazwa użytkownika</label>
+            <label for="login">Login</label>
             <div *ngIf="submitted && form.login.errors?.required">
-                <p class="invalid-input-text">Proszę podać nazwę użytkownika</p>
+                <p class="invalid-input-text">Proszę podać login</p>
             </div>
             <input type="text" 
                 formControlName="login"
