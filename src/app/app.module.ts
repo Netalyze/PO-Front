@@ -17,6 +17,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { DndDirective } from './directives/dnd.directive';
 import { CreateTripComponent } from './create-trip/create-trip.component';
 import { AuthInterceptor } from './services/token-interceptor';
+import { HomeCardsComponent } from './home-cards/home-cards.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,8 @@ import { AuthInterceptor } from './services/token-interceptor';
     NavbarComponent,
     DndDirective,
     CreateTripComponent,
+    HomeCardsComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

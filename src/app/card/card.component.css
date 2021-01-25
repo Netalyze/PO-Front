@@ -1,0 +1,22 @@
+.container {
+    margin-bottom: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0 4px 25px rgba(14, 36, 49, .15);
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+.container:hover {
+    transform: translateY(-1%);
+}
+.title {
+    padding: 1rem;
+    text-align: center;
+}
+
+.description {
+    text-align: justify;
+    padding: 0 1rem 1rem 1rem;
+    letter-spacing: .05rem;
+    line-height: 1.6rem;
+}
