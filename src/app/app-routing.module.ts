@@ -11,6 +11,7 @@ import { TripSubmitComponent } from './trip-submit/trip-submit.component';
 import { CreateTripComponent } from './create-trip/create-trip.component';
 import { FragmentsMenuComponent } from './fragments-menu/fragments-menu.component';
 import { UsersListComponent } from './users-list/users-list.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthguardService] },
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'stworz-wycieczke', component: CreateTripComponent },
   { path: 'zarzadzaj-odcinkami', component: FragmentsMenuComponent },
   { path: 'uzytkownicy', component: UsersListComponent },
+  { path: 'dodaj-uzytkownika', component: AddUserComponent },
 
   { path: '**', redirectTo: ''}
 ];

@@ -1,0 +1,63 @@
+<div class="grid container">
+    <div class="grid-item title">
+        Dodaj użytkownika
+    </div>
+    <form [formGroup]="addForm" class="grid-item">
+        <div class="form-group">
+            <label for="email">Adres e-mail</label>
+            <div *ngIf="submitted && form.email.errors?.required">
+                <p class="invalid-input-text">Adres e-mail jest wymagany</p>
+            </div>
+            <div *ngIf="submitted && form.email.errors?.email">
+                <p class="invalid-input-text">Proszę podać prawidłowy adres email</p>
+            </div>
+            <input type="email" 
+                formControlName="email" 
+                [ngClass]="{ 'is-invalid': submitted && form.email.errors }" >
+        </div>
+
+        <div class="form-group">
+            <label for="login">Nazwa użytkownika</label>
+            <div *ngIf="submitted && form.login.errors?.required">
+                <p class="invalid-input-text">Nazwa użytkownika jest wymagana</p>
+            </div>
+            <div *ngIf="submitted && form.login.errors?.minlength">
+                <p class="invalid-input-text">Nazwa użytkownika musi składać się z min. 5 znaków</p>
+            </div>
+            <input type="text" 
+                formControlName="login" 
+                class="input-text" 
+                [ngClass]="{ 'is-invalid': submitted && form.login.errors }">
+        </div>
+
+        <div class="form-group">
+            <label for="password">Hasło</label>
+            <div *ngIf="submitted && form.password.errors?.required">
+                <p class="invalid-input-text">Proszę podać hasło</p>
+            </div>
+            <input type="password" 
+                formControlName="password" 
+                class="input-text" 
+                [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+        </div>
+
+        <div class="form-group">
+            <label for="area">Rola</label>
+            <div class="error-group">
+                <div *ngIf="submitted && form.role.errors?.required">
+                    <p class="invalid-input-text">Proszę wybrać rolę</p>
+                </div>
+                <select name="role" 
+                    formControlName="role"
+                    [ngClass]="{ 'is-invalid': submitted && form.role.errors }">
+                    <option *ngFor="let role of roles" value="{{role.id}}">{{role.name}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group buttons">
+            <button (click)="cancel()">Anuluj</button>
+            <button [disabled]="loading" (click)="onSubmit()">Dodaj</button>
+        </div>
+    </form>
+</div>

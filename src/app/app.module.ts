@@ -20,6 +20,7 @@ import { AuthInterceptor } from './services/token-interceptor';
 import { HomeCardsComponent } from './home-cards/home-cards.component';
 import { CardComponent } from './card/card.component';
 import { UsersListComponent } from './users-list/users-list.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { UsersListComponent } from './users-list/users-list.component';
     HomeCardsComponent,
     CardComponent,
     UsersListComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,

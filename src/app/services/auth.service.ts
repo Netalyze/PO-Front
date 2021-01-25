@@ -30,8 +30,12 @@ export class AuthService {
     else return null;
   }
 
-  register(email: string, login: string, password: string,) {
+  register(email: string, login: string, password: string) {
     return this.http.post(`${environment.apiUrl}/register`, { email, login, password });
+  }
+
+  addUser(email: string, login: string, password: string, role: string) {
+    return this.http.post(`${environment.apiUrl}/register`, { email, login, password, role });
   }
 
   login(login: string, password: string) {

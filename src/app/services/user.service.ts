@@ -12,4 +12,8 @@ export class UserService {
   async getAllUsers() { 
     return await this.http.get(`${environment.apiUrl}/users`).toPromise();
   }
+
+  async getAlRoles() { 
+    return await this.http.get(`${environment.apiUrl}/roles`).toPromise();
+  }
 }
