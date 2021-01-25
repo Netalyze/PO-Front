@@ -24,6 +24,9 @@
             <div *ngIf="submitted && form.login.errors?.minlength">
                 <p class="invalid-input-text">Nazwa użytkownika musi składać się z min. 5 znaków</p>
             </div>
+            <div *ngIf="submitted && form.login.errors?.maxlength">
+                <p class="invalid-input-text">Nazwa użytkownika może składać się max. z 50 znaków</p>
+            </div>
             <input type="text" 
                 formControlName="login" 
                 class="input-text" 
@@ -34,6 +37,12 @@
             <label for="password">Hasło</label>
             <div *ngIf="submitted && form.password.errors?.required">
                 <p class="invalid-input-text">Proszę podać hasło</p>
+            </div>
+            <div *ngIf="submitted && form.password.errors?.minlength">
+                <p class="invalid-input-text">Hasło musi składać się z min. 8 znaków</p>
+            </div>
+            <div *ngIf="submitted && form.password.errors?.maxlength">
+                <p class="invalid-input-text">Hasło może składać się max. z 50 znaków</p>
             </div>
             <input type="password" 
                 formControlName="password" 
