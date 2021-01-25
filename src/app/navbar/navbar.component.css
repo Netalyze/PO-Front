@@ -55,8 +55,12 @@ a {
         height: 100%;
         width: 40%;
         padding: 2rem;
-        background-color: whitesmoke;
+        background-color: #595377;
         transition: .5s;
+    }
+
+    .bx-user-circle, .bx-log-out {
+        color: white !important;
     }
 }
 
@@ -70,11 +74,11 @@ a {
 }
 
 .nav-logo {
-    color: rgb(39, 134, 65);;
+    color: #595377;
 }
 
 .nav-toggle {
-    color: rgb(39, 134, 65);;
+    color: #595377;
     font-size: 1.5rem;
     cursor: pointer;
 }
@@ -113,11 +117,11 @@ a {
     }
 
     .nav-link {
-        color: rgb(39, 134, 65);
+        color: #595377;
     }
 
     .nav-link:hover {
         transition: 0.5s;
-        color: rgb(64, 194, 101);
+        color: #595377;
     }
 }
