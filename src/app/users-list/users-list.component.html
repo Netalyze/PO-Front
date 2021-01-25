@@ -1,0 +1,17 @@
+<div class="grid">
+    <ng-container *ngFor="let user of users">
+        <div class="content">
+            <div class="icon item">
+                <i class='bx bxs-user-circle'></i>
+            </div>
+            <div class="user-info item">
+                <div><b>Login:</b> {{user.login}}</div>
+                <div><b>Email:</b> {{user.email}}</div>
+                <div><b>Rola:</b> {{user.role}}</div>
+            </div>
+            <div class="item">
+                <button>Zarządzaj</button>
+            </div>
+        </div>
+    </ng-container>
+</div>

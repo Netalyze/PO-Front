@@ -19,6 +19,7 @@ import { CreateTripComponent } from './create-trip/create-trip.component';
 import { AuthInterceptor } from './services/token-interceptor';
 import { HomeCardsComponent } from './home-cards/home-cards.component';
 import { CardComponent } from './card/card.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { CardComponent } from './card/card.component';
     CreateTripComponent,
     HomeCardsComponent,
     CardComponent,
+    UsersListComponent,
   ],
   imports: [
     BrowserModule,
