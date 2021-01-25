@@ -9,6 +9,7 @@ import { FragmentEditComponent } from './fragment-edit/fragment-edit.component';
 import { FragmentsListComponent } from './fragments-list/fragments-list.component';
 import { TripSubmitComponent } from './trip-submit/trip-submit.component';
 import { CreateTripComponent } from './create-trip/create-trip.component';
+import { FragmentsMenuComponent } from './fragments-menu/fragments-menu.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthguardService] },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'lista-odcinkow', component: FragmentsListComponent },
   { path: 'wyslij-wycieczke', component: TripSubmitComponent },
   { path: 'stworz-wycieczke', component: CreateTripComponent },
+  { path: 'zarzadzaj-odcinkami', component: FragmentsMenuComponent },
 
   { path: '**', redirectTo: ''}
 ];

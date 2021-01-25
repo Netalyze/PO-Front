@@ -55,7 +55,7 @@ export class FragmentAddComponent implements OnInit {
   get form() { return this.addForm.controls; }
 
   cancel() { 
-    this.router.navigate(['/']);
+    this.router.navigate(['/zarzadzaj-odcinkami']);
     return;
   }
 

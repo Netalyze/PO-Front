@@ -18,7 +18,7 @@
 
             <!-- NAVBAR MODERATORA -->
             <ul class="nav-list" *ngIf="role === 'Moderator'">
-                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Zarządzaj odcinkami</a></li>
+                <li class="nav-item"><a routerLink="/zarzadzaj-odcinkami" class="nav-link" (click)="itemSelected()">Zarządzaj odcinkami</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Dostępnośc odcinków</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Punktacja odznak</a></li>
                 <li class="nav-item"><a href="#" class="nav-link"><i class='bx bx-user-circle'></i></a></li>
