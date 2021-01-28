@@ -1,4 +1,4 @@
-<header *ngIf="userLogged" class="header">
+<header class="header">
     <nav class="nav grid">
         <div>
             <a routerLink="/" class="nav-logo">SZLAKOWNIK</a>
@@ -7,7 +7,7 @@
         <div class="nav-menu" id="navmenu" [ngClass]="menuVisible ? 'show' : 'hide'">
 
             <!-- NAVBAR TURYSTY -->
-            <ul class="nav-list" *ngIf="role === 'Tourist'">
+            <ul class="nav-list" *ngIf="getRole() === 'Tourist'">
                 <li class="nav-item"><a routerLink="/stworz-wycieczke" class="nav-link" (click)="itemSelected()">Stwórz wycieczkę</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Historia wycieczek</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Twoja odznaka</a></li>
@@ -17,7 +17,7 @@
             </ul>
 
             <!-- NAVBAR MODERATORA -->
-            <ul class="nav-list" *ngIf="role === 'Moderator'">
+            <ul class="nav-list" *ngIf="getRole() === 'Moderator'">
                 <li class="nav-item"><a routerLink="/zarzadzaj-odcinkami" class="nav-link" (click)="itemSelected()">Zarządzaj odcinkami</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Dostępnośc odcinków</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Punktacja odznak</a></li>
@@ -26,7 +26,7 @@
             </ul>
 
             <!-- NAVBAR ADMINA -->
-            <ul class="nav-list" *ngIf="role === 'Admin'">
+            <ul class="nav-list" *ngIf="getRole() === 'Admin'">
                 <li class="nav-item"><a routerLink="/uzytkownicy" class="nav-link" (click)="itemSelected()">Lista użytkowników</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Konfiguruj system</a></li>
                 <li class="nav-item"><a href="#" class="nav-link"><i class='bx bx-user-circle'></i></a></li>

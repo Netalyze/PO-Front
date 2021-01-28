@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+
   constructor(private http: HttpClient, private router: Router) { }
 
   public get isLoggedIn() {
@@ -19,7 +20,7 @@ export class AuthService {
     const role = JSON.parse(localStorage.getItem('currentUser')!);
     if (role != null) 
       return role.user.role;
-    else return  null;
+    else return null;
   }
 
   public get token() { 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -10,7 +11,7 @@ export class NavbarComponent implements OnInit {
 
   menuVisible = false;
   userLogged = false;
-  role = '';
+  role = ''; 
 
   constructor(private auth: AuthService) { }
 
@@ -26,5 +27,9 @@ export class NavbarComponent implements OnInit {
   logoutUser() {
     this.userLogged = false;
     this.auth.logout();
+  }
+
+  getRole() {
+    return this.auth.role;
   }
 }

@@ -67,6 +67,14 @@
         margin-right: 0 !important;
         margin-bottom: .5rem;
     }
+
+    .inner-container {
+        grid-template-columns: none !important;
+    }
+
+    .summary {
+        grid-template-columns: none !important;
+      }
 }
 
 input[type="text"], input[type="number"] {
@@ -104,7 +112,7 @@ button:active {
 
 .inner-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 textarea {
@@ -165,7 +173,7 @@ textarea {
   .summary {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     margin: .5rem .3rem;
   }
 
