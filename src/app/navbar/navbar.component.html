@@ -8,7 +8,7 @@
 
             <!-- NAVBAR TURYSTY -->
             <ul class="nav-list" *ngIf="role === 'Tourist'">
-                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Stwórz wycieczkę</a></li>
+                <li class="nav-item"><a routerLink="/stworz-wycieczke" class="nav-link" (click)="itemSelected()">Stwórz wycieczkę</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Historia wycieczek</a></li>
                 <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Twoja odznaka</a></li>
                 <li class="nav-item"><a routerLink="/wyslij-wycieczke" class="nav-link" (click)="itemSelected()">Złóż wniosek</a></li>
