@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:5000/api' // do zmiany
+  apiUrl: 'http://localhost:5000/api',
+
+  iconOk: 'bx bx-message-alt-check',
+  iconError: 'bx bx-message-alt-x'
 };
 
 /*

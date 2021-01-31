@@ -21,6 +21,7 @@ import { HomeCardsComponent } from './home-cards/home-cards.component';
 import { CardComponent } from './card/card.component';
 import { UsersListComponent } from './users-list/users-list.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { MessagesComponent } from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { AddUserComponent } from './add-user/add-user.component';
     CardComponent,
     UsersListComponent,
     AddUserComponent,
+    MessagesComponent,
   ],
   imports: [
     BrowserModule,

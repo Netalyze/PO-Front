@@ -69,6 +69,12 @@ button {
     background-color: inherit;
 }
 
+button:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transition: .3s;
+}
+
 button:focus {
     outline: none;
 }

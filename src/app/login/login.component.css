@@ -84,5 +84,5 @@ button:active {
 
 a {
     text-decoration: none;
-    color: rgb(39, 134, 65);
+    color: var(--primary-color);
 }

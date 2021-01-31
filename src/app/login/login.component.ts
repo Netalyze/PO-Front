@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
     private auth: AuthService,
-    private router: Router) {
+    private router: Router,
+    private messageService: MessageService) {
       if (this.auth.isLoggedIn) {
         this.router.navigate(['/']);
       }
@@ -46,7 +48,8 @@ export class LoginComponent implements OnInit {
       },
         err => {
           this.loading = false;
-          console.log(err);
+          this.messageService.addMessage(err.error, 'error');
+          console.log(err.error);
         })
   }
 }

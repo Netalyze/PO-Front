@@ -1,8 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
 :root {
     --primary-color: #595377;
+    --body-font: 'Poppins', sans-serif;
 }
 
 body {
-    margin: 0
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+button {
+    cursor: pointer;
+    border: 3px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 6px;
+    text-transform: uppercase;
+    background: white;
+}
+
+button:hover {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    transition: .3s;
+}
+
+button:active {
+    transform: scale(0.95);
+    outline: none;
 }
