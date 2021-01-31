@@ -1,11 +1,19 @@
 <div *ngIf="messageService.message.length" class="outer-container">
-    <div class="icon" [ngClass]="messageService.status === 'ok' ? 'icon-ok' : 'icon-err'">
-        <i class="{{messageService.icon}}"></i>
-    </div>
-    <div class="message">
-        {{messageService.message}}
-    </div>
-    <div class="button-close">
-        <button (click)="messageService.clear()">Zamknij</button>
+    <div class="content">
+        <div class="icon" [ngClass]="messageService.status === 'ok' ? 'icon-ok' : 'icon-err'">
+            <i class="{{messageService.icon}}"></i>
+        </div>
+        <div *ngIf="messageService.status === 'ok'" class="header">
+            <b>Udało się!</b>
+        </div>
+        <div *ngIf="messageService.status !== 'ok'" class="header">
+            <b>Wystąpił błąd</b>
+        </div>
+        <div class="message">
+            {{messageService.message}}
+        </div>
+        <div class="button-close">
+            <button (click)="messageService.clear()">Zamknij</button>
+        </div>
     </div>
 </div>

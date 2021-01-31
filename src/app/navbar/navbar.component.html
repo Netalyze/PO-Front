@@ -32,6 +32,15 @@
                 <li class="nav-item"><a href="#" class="nav-link"><i class='bx bx-user-circle'></i></a></li>
                 <li class="nav-item"><a href="" (click)="logoutUser()" class="nav-link"><i class="bx bx-log-out"></i></a></li>
             </ul>
+
+            <!-- NAVBAR PRZODOWNIKA -->
+            <ul class="nav-list" *ngIf="getRole() === 'Leader'">
+                <li class="nav-item"><a routerLink="/uzytkownicy" class="nav-link" (click)="itemSelected()">Zatwierdź wycieczkę</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Stwórz wycieczkę</a></li>
+                <li class="nav-item"><a href="#" class="nav-link" (click)="itemSelected()">Moje wycieczki</a></li>
+                <li class="nav-item"><a href="#" class="nav-link"><i class='bx bx-user-circle'></i></a></li>
+                <li class="nav-item"><a href="" (click)="logoutUser()" class="nav-link"><i class="bx bx-log-out"></i></a></li>
+            </ul>
         </div>
 
         <div class="nav-toggle" id="navtoggle" (click)="itemSelected()">

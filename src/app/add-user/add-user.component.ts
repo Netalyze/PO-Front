@@ -60,7 +60,10 @@ export class AddUserComponent implements OnInit {
     this.auth.addUser(this.form.email.value, this.form.login.value, this.form.password.value, this.form.role.value)
       .pipe(first())
       .subscribe(
-        () => { this.router.navigate(['/uzytkownicy']); },
+        (data: any) => {
+          this.messageService.addMessage(data.msg, 'ok');
+          this.router.navigate(['/uzytkownicy']); 
+        },
         err => {
           this.loading = false;
           this.messageService.addMessage(err.error.msg, 'error');

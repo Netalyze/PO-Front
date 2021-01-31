@@ -1,6 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from '../message.service';
 import { FragmentsService } from '../services/fragments.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class CreateTripComponent implements OnInit {
   lengthTotal = 0;
   pointsTotal = 0;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private http: FragmentsService) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private http: FragmentsService, private messageService: MessageService) { }
 
 
   ngOnInit(): void {
@@ -86,11 +87,16 @@ export class CreateTripComponent implements OnInit {
     if (this.tripCreateForm.invalid) {
       return;
     }
-    console.log('Add trip');
+    this.messageService.addMessage('Wycieczka została utworzona. Zostaniesz przekierowany na stronę główną', 'ok');
+    setTimeout(() => {
+      this.router.navigate(['/']);
+      this.messageService.clear();
+    }
+    , 1500);
   }
 
   cancel() { 
-    this.router.navigate(['']);
+    this.router.navigate(['/']);
   }
 
   checkDates(group: FormGroup) {

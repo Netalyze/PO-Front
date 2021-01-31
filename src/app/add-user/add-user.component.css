@@ -77,11 +77,6 @@ button:active {
     outline: none;
 }
 
-a {
-    text-decoration: none;
-    color: rgb(39, 134, 65);
-}
-
 .buttons {
     display: flex;
     justify-content: space-between;

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from '../message.service';
 import { TripService } from '../services/trip.service';
 @Component({
   selector: 'app-trip-submit',
@@ -20,7 +21,10 @@ export class TripSubmitComponent implements OnInit {
   fileSizeValid = true;
   loading = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private http: TripService) { }
+  constructor(private formBuilder: FormBuilder, 
+              private router: Router, 
+              private http: TripService,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.tripSubmitForm = this.formBuilder.group({
@@ -83,6 +87,11 @@ export class TripSubmitComponent implements OnInit {
     if (this.tripSubmitForm.invalid) {
       return;
     }
-    this.router.navigate(['/']);
+    this.messageService.addMessage('Wycieczka została wysłana! Zostaniesz przekierowany na stronę główną', 'ok');
+    setTimeout(() => {
+      this.router.navigate(['/']);
+      this.messageService.clear();
+    }
+    , 1500);
   }
 }

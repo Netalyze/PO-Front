@@ -19,10 +19,19 @@
     padding-top: 1rem;
 }
 
+.content {
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+.header {
+    font-size: 1.5rem;
+}
+
 .message {
     margin-bottom: 1rem;
     padding: .5rem;
-    font-size: 1.5rem;
+    font-size: 1.25rem;
 }
 
 .icon-ok {
