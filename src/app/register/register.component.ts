@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(private formbuilder: FormBuilder, 
               private auth: AuthService, 
-              private router: Router) {
+              private router: Router,
+              private messageService: MessageService) {
     if (this.auth.isLoggedIn) {
       this.router.navigate(['/']);
     }
@@ -44,10 +46,15 @@ export class RegisterComponent implements OnInit {
     this.auth.register(this.form.email.value, this.form.login.value, this.form.password.value)
       .pipe(first())
       .subscribe(
-        () => { this.router.navigate(['/login']); }, // Może być do zmiany
+        (data: any) => {
+          console.log(data.msg);
+          this.messageService.addMessage(data.msg, 'ok');
+          this.router.navigate(['/login']); 
+        },
         err => {
           this.loading = false;
-          console.log(err);
+          this.messageService.addMessage(err.error.msg, 'error');
+          console.log(err.error);
         }
       )
   }

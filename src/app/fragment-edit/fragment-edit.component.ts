@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FragmentsService } from '../services/fragments.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-fragment-edit',
@@ -22,7 +23,8 @@ export class FragmentEditComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, 
               private fragmentsService: FragmentsService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.fragmentId = +this.activatedRoute.snapshot.paramMap.get('id')!;
@@ -84,25 +86,26 @@ export class FragmentEditComponent implements OnInit {
 
     this.loading = true;
     let requestBody = {
-      'area_id': this.form.area.value,
-      'point_start': this.form.pointStart.value,
-      'point_end': this.form.pointEnd.value,
-      'name': this.form.name.value,
-      'length': this.form.length.value,
-      'scoring_up': this.form.scoringUp.value,
-      'scoring_down': this.form.scoringDown.value,
-      'climb_length': this.calcClimbLength(this.form.pointStart.value, this.form.pointEnd.value),
-      'fragment_type': 'punktowany',
+      area_id: this.form.area.value,
+      point_start: this.form.pointStart.value,
+      point_end: this.form.pointEnd.value,
+      name: this.form.name.value,
+      length: this.form.length.value,
+      scoring_up: this.form.scoringUp.value,
+      scoring_down: this.form.scoringDown.value,
+      climb_length: this.calcClimbLength(this.form.pointStart.value, this.form.pointEnd.value),
+      fragment_type: 'punktowany',
     };
 
     this.fragmentsService.editFragment(requestBody, this.fragmentId)
       .pipe(first())
-      .subscribe(() => {
-        console.log('Fragment edited');
+      .subscribe((data: any) => {
+        this.messageService.addMessage(data.msg, 'ok');
         this.router.navigate(['/lista-odcinkow']);
       }, 
       err => {
-        console.log('Error occured while editing fragment:');
+        this.loading = false;
+        this.messageService.addMessage(err.error.msg, 'error');
         console.log(err);
       });
   }
@@ -114,6 +117,6 @@ export class FragmentEditComponent implements OnInit {
       if (point.id === Number(pointAID)) { pointAAltitude = point.altitude; }
       else if (point.id === Number(pointBID)) { pointBAltitude = point.altitude; }
     }
-    return Math.abs(pointAAltitude - pointBAltitude);  // Nie wiem jak z rozróżnieniem czy wchodzimy czy schodzimy dlatego abs
+    return Math.abs(pointAAltitude - pointBAltitude);
   }
 }

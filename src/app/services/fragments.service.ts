@@ -30,7 +30,7 @@ export class FragmentsService {
   }
 
   editFragment(fragmentData: any, id: number) {
-    return this.http.post(`${environment.apiUrl}/fragments/edit/1`, fragmentData);
+    return this.http.post(`${environment.apiUrl}/fragments/edit/${id}`, fragmentData);
   }
 
   getFragmentsForArea(areaId: number) {

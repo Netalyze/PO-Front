@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FragmentsService } from '../services/fragments.service';
 import { Router } from '@angular/router';
 import { first } from 'rxjs/operators';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-fragment-add',
@@ -19,7 +20,8 @@ export class FragmentAddComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, 
               private fragmentsService: FragmentsService,
-              private router: Router) { }
+              private router: Router,
+              private messageService: MessageService) { }
 
   ngOnInit(): void {
     this.addForm = this.formBuilder.group({
@@ -80,12 +82,13 @@ export class FragmentAddComponent implements OnInit {
 
     this.fragmentsService.addFragment(requestBody)
       .pipe(first())
-      .subscribe(() => {
-        console.log('Fragment added');
-        this.router.navigate(['/']);
+      .subscribe((data: any) => {
+        this.messageService.addMessage(data.msg, 'ok');
+        this.router.navigate(['/lista-odcinkow']);
       },
       err => {
-        console.log('Error occured while adding fragment:');
+        this.loading = false;
+        this.messageService.addMessage(err.error.msg, 'error');
         console.log(err);
       });
   }

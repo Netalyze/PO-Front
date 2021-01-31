@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { UserService } from '../services/user.service';
 import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-add-user',
@@ -20,7 +21,8 @@ export class AddUserComponent implements OnInit {
   constructor(private formbuilder: FormBuilder,
               private auth: AuthService,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private messageService: MessageService) {
    }
 
   ngOnInit(): void {
@@ -61,6 +63,7 @@ export class AddUserComponent implements OnInit {
         () => { this.router.navigate(['/uzytkownicy']); },
         err => {
           this.loading = false;
+          this.messageService.addMessage(err.error.msg, 'error');
           console.log(err);
         }
       );
