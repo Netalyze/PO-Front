@@ -1,0 +1,11 @@
+<div *ngIf="messageService.message.length" class="outer-container">
+    <div class="icon" [ngClass]="messageService.status === 'ok' ? 'icon-ok' : 'icon-err'">
+        <i class="{{messageService.icon}}"></i>
+    </div>
+    <div class="message">
+        {{messageService.message}}
+    </div>
+    <div class="button-close">
+        <button (click)="messageService.clear()">Zamknij</button>
+    </div>
+</div>
