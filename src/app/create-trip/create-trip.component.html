@@ -9,46 +9,54 @@
                     <label for="name">Nazwa</label>
                     <div class="error-group">
                         <div *ngIf="submitted && form.name.errors?.required">
-                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                            <small class="invalid-input-text">Proszę podać nazwę odcinka</small>
                         </div>
                         <input type="text" 
-                            formControlName="name" >
+                            formControlName="name"
+                            [ngClass]="{ 'is-invalid': submitted && form.name.errors }" >
                     </div>
                 </div>
         
                 <div class="form-group">
                     <label for="startDate">Data rozpoczęcia</label>
                     <div class="error-group">
-                        <div *ngIf="submitted && form.name.errors?.required">
-                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        <div *ngIf="submitted && form.startDate.errors?.required">
+                            <small class="invalid-input-text">Proszę wybrać datę rozpoczęcia</small>
+                        </div>
+                        <div *ngIf="submitted && tripCreateForm.hasError('notValid')">
+                            <small class="invalid-input-text">Data rozpoczęcia musi być wcześniejsza</small>
                         </div>
                         <input type="date" name="startDate"
-                            formControlName="startDate" >
+                            formControlName="startDate"
+                            [ngClass]="{ 'is-invalid': submitted && (form.startDate.errors || tripCreateForm.hasError('notValid')) }" >
                     </div>
                 </div>
         
                 <div class="form-group">
                     <label for="endDate">Data zakończenia</label>
                     <div class="error-group">
-                        <div *ngIf="submitted && form.name.errors?.required">
-                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        <div *ngIf="submitted && form.endDate.errors?.required">
+                            <small class="invalid-input-text">Proszę datę zakończenia</small>
                         </div>
                         <input type="date" name="endDate"
-                            formControlName="endDate" >
+                            formControlName="endDate"
+                            [ngClass]="{ 'is-invalid': submitted && form.endDate.errors }" >
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="mountainRange">Pasmo górskie</label>
                     <div class="error-group">
-                        <div *ngIf="submitted && form.name.errors?.required">
-                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        <div *ngIf="submitted && form.mountainRange.errors?.required">
+                            <small class="invalid-input-text">Proszę wybrać pasmo górskie</small>
                         </div>
                         <select name="mountainRange" 
                         formControlName="mountainRange" 
-                        [ngClass]="{ 'is-invalid': submitted && form.trip.errors }">
-                            <option value="" selected disabled hidden>Wybierz pasmo...</option>
-                            <option *ngFor="let trip of trips">
-                                {{trip.id}}
+                        [(ngModel)]="currentArea"
+                        (change)="onAreaSelected($event)"
+                        [ngClass]="{ 'is-invalid': submitted && form.mountainRange.errors }">
+                            <option value="" selected hidden>Wybierz pasmo...</option>
+                            <option *ngFor="let area of areas">
+                                {{area.id}}.{{area.name}}
                             </option>
                         </select>
                     </div>
@@ -56,16 +64,18 @@
                 <div class="form-group">
                     <label for="startingPoint">Punkt początkowy</label>
                     <div class="error-group">
-                        <div *ngIf="submitted && form.name.errors?.required">
-                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        <div *ngIf="submitted && form.startingPoint.errors?.required">
+                            <small class="invalid-input-text">Proszę wybrać punkt początkowy</small>
                         </div>
                         <select name="startingPoint" 
                         formControlName="startingPoint" 
                         [(ngModel)]="currentPoint"
-                        [ngClass]="{ 'is-invalid': submitted && form.trip.errors }">
-                            <option value="" selected disabled hidden>Wybierz punkt...</option>
-                            <option *ngFor="let trip of trips">
-                                {{trip.id}}
+                        [attr.disabled]="currentArea == null ? '' : null"
+                        (change)="onStartPointSelected($event)"
+                        [ngClass]="{ 'is-invalid': submitted && form.startingPoint.errors }">
+                            <option value="" selected hidden>Wybierz punkt...</option>
+                            <option *ngFor="let point of points">
+                                {{point.id}}.{{point.name}}
                             </option>
                         </select>
                     </div>
@@ -74,14 +84,15 @@
                 <div class="form-group">
                     <textarea readonly="true"
                     rows="4"
+                    [value]="tripFragmentsStr"
                     >
                 </textarea>
                 </div>
                 <div class="form-group">
                     <label for="currentAsEnd">Aktualny odcinek jako końcowy</label>
                     <div class="error-group">
-                        <div *ngIf="submitted && form.name.errors?.required">
-                            <p class="invalid-input-text">Proszę podać nazwę odcinka</p>
+                        <div *ngIf="submitted && form.currentAsEnd.errors?.required">
+                            <small class="invalid-input-text">Proszę podać nazwę odcinka</small>
                         </div>
                         <input type="checkbox" name="currentAsEnd"
                             formControlName="currentAsEnd" >
@@ -89,7 +100,7 @@
                 </div>
             </div>
             <div>
-                <p class="current-point">Aktualny punkt:  <span>{{currentPoint}}</span></p> 
+                <p class="current-point">Aktualny punkt:  <span>{{nextPoint}}</span></p> 
                 <!-- Tutaj jeszcze przycisk 'Dodaj własny odcinek, ale nie wiem jak go wkomponować' -->
                 <div class="tab">
                     <button class="tablinks"
@@ -100,12 +111,14 @@
                     >Odcinki własne</button>
                 </div>
                 <div class="fragments">
-                    <div *ngFor="let item of fragments" class="fragment">
-                        <div class="fragment-content">{{item.name}}</div>
-                        <div class="fragment-content">{{item.pointsUp}}/{{item.pointsDown}}</div>
-                        <div class="fragment-content">{{item.length}}km</div>
-                        <div class="fragment-content"><i class='bx bx-plus-circle'></i></div>
-                    </div>
+                    <div *ngIf="currentPoint != null">
+                        <div *ngFor="let item of fragmentsForPoint" class="fragment">
+                            <div class="fragment-content">{{item.name}}</div>
+                            <div class="fragment-content">{{item.scoring_up}}/{{item.scoring_down}}</div>
+                            <div class="fragment-content">{{item.length}}km</div>
+                            <div class="fragment-content" (click)="addNextFragment(item)"><i class='bx bx-plus-circle'></i></div>
+                        </div>
+                    </div>          
                 </div>
                 <div class="summary">
                     <div class="trip-data">
@@ -116,8 +129,8 @@
                             Długość: <span class="result">{{lengthTotal}}</span>
                         </div>
                     </div>
-                    <div class="summary-btn"><button>Zapisz</button></div>
-                    <div class="summary-btn"><button>Anuluj</button></div>
+                    <div class="summary-btn"><button (click)="addTrip()">Zapisz</button></div>
+                    <div class="summary-btn"><button (click)="cancel()">Anuluj</button></div>
                 </div>
             </div>
         </div>

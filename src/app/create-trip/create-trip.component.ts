@@ -1,6 +1,7 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FragmentsService } from '../services/fragments.service';
 
 @Component({
   selector: 'app-create-trip',
@@ -9,16 +10,22 @@ import { Router } from '@angular/router';
 })
 export class CreateTripComponent implements OnInit {
   
-  trips = [{'id': 1}, {'id': 2}];
-  fragments = [{'name': 'Hala Gąsienicowa', 'pointsUp': 9, 'pointsDown': 6, 'length': 3.2}]
+  areas: any;
+  currentArea: any = null;
+  points: any;
+  fragments: any;
+  fragmentsForPoint: any = [];
+  tripFragments: any = [];
+  tripFragmentsStr = "";
   tripCreateForm!: FormGroup;
   submitted = false;
-  currentPoint = "";
+  currentPoint: any = null;
+  nextPoint: any = null;
   activeTab = 1;
   lengthTotal = 0;
   pointsTotal = 0;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private http: FragmentsService) { }
 
 
   ngOnInit(): void {
@@ -29,9 +36,68 @@ export class CreateTripComponent implements OnInit {
       mountainRange: ['', Validators.required],
       startingPoint: ['', Validators.required],
       currentAsEnd: [''],
+    }, {validator: this.checkDates});
+
+    this.http.getAllAreas().then((data: any) => {
+      this.areas = data.data;
     });
   }
 
   get form() { return this.tripCreateForm.controls; }
+
+  onAreaSelected(event: any) {
+    let id = this.currentArea.split('.')[0];
+    this.http.getPointsForArea(id).then((data: any) => {
+      this.points = data.data;
+    });
+    this.http.getFragmentsForArea(id).then((data: any) => {
+      this.fragments = data.data;
+    });
+  }
+
+  onStartPointSelected(event: any) {
+    this.nextPoint = this.currentPoint;
+    let id = this.currentPoint.split('.')[0];
+    this.updateFragmentsList(id);
+  }
+
+  addNextFragment(item: any) {
+    console.log(item);
+    this.tripFragments.push(item);
+    this.http.getPoint(item.point_end).then((data: any) => {
+      this.tripFragmentsStr += this.nextPoint.split('.')[1] + " -> " + data.data.name + `\t(${item.scoring_up})\n`;
+      this.nextPoint = data.data.id + "." + data.data.name;
+      this.lengthTotal += Number(item.length);
+      this.pointsTotal += Number(item.scoring_up);
+    });
+    this.updateFragmentsList(item.point_end);
+  }
+
+  updateFragmentsList(startId: any) {
+    this.fragmentsForPoint = [];
+    for (let i = 0; i < this.fragments.length; i++) {
+      if (this.fragments[i].point_start == startId)
+        this.fragmentsForPoint.push(this.fragments[i]);
+    }
+  }
+
+  addTrip() {
+    this.submitted = true;
+    if (this.tripCreateForm.invalid) {
+      return;
+    }
+    console.log('Add trip');
+  }
+
+  cancel() { 
+    this.router.navigate(['']);
+  }
+
+  checkDates(group: FormGroup) {
+    if(group.controls.endDate.value < group.controls.startDate.value) {
+    return { notValid:true }
+    }
+    return null;
+ }
 
 }

@@ -32,4 +32,16 @@ export class FragmentsService {
   editFragment(fragmentData: any, id: number) {
     return this.http.post(`${environment.apiUrl}/fragments/edit/1`, fragmentData);
   }
+
+  getFragmentsForArea(areaId: number) {
+    return this.http.get(`${environment.apiUrl}/fragments/area/${areaId}`).toPromise();
+  }
+
+  getPointsForArea(areaId: number) {
+    return this.http.get(`${environment.apiUrl}/points/area/${areaId}`).toPromise();
+  }
+
+  getPoint(id: number) {
+    return this.http.get(`${environment.apiUrl}/points/${id}`).toPromise();
+  }
 }

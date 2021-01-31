@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TripService } from '../services/trip.service';
 @Component({
   selector: 'app-trip-submit',
   templateUrl: './trip-submit.component.html',
@@ -11,23 +12,25 @@ export class TripSubmitComponent implements OnInit {
   tripSubmitForm!: FormGroup;
   @ViewChild("fileDrop", { static: false })
   fileDropEl!: ElementRef;
-  trips = 
-  [
-    {'id': 1}, {'id': 2}
-];
+  trips = [{'id': 1, 'name': 'Moja wycieczka 1'}, {'id': 2, 'name': 'Moja wycieczka 2'}];
+  guides: any;
   files: any = [];
   filesSize = 0;
   submitted = false;
   fileSizeValid = true;
   loading = false;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) { }
+  constructor(private formBuilder: FormBuilder, private router: Router, private http: TripService) { }
 
   ngOnInit(): void {
     this.tripSubmitForm = this.formBuilder.group({
       trip: ['', Validators.required],
       comment: ['', Validators.maxLength(200)],
       guide: ['']
+    });
+    this.http.getAllLeaders().then((data: any) => {
+      this.guides = data.data;
+      console.log(data.data)
     });
   }
 

@@ -14,6 +14,10 @@ export class TripService {
   }
 
   async addTrip(data: any) {
-    return await this.http.post(`${environment.apiUrl}/trips/add`, data).toPromise();
+    return await this.http.post(`${environment.apiUrl}/trips/add`, data);
+  }
+
+  getAllLeaders() {
+    return this.http.get(`${environment.apiUrl}/leaders`).toPromise();
   }
 }

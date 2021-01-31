@@ -10,7 +10,7 @@
             [ngClass]="{ 'is-invalid': submitted && form.trip.errors }">
                 <option value="" selected disabled hidden>Wybierz wycieczkę...</option>
                 <option *ngFor="let trip of trips">
-                    {{trip.id}}
+                    {{trip.id}}. {{trip.name}}
                 </option>
             </select>
             <div *ngIf="submitted && form.trip.errors?.required" class="error">
@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <label for="proof">Dowody</label>
-            <div class="dropzone" [ngClass]="{ 'is-invalid': !fileSizeValid }">
+            <div class="dropzone" [ngClass]="{ 'is-invalid': !fileSizeValid || (files.length == 0 && submitted)}">
                 <div class="drag-drop" appDnd (onFileDropped)="onFileDropped($event)">
                     <input type="file" #fileDrop id="fileDrop" multiple (change)="fileBrowseHandler($event.target)"/>
                 </div>
@@ -49,13 +49,16 @@
                   <img src="assets/icons/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
                 </div>
               </div>
+              <div *ngIf="submitted && files.length == 0" class="error">
+                <small class="invalid-input-text">Proszę dodać dowody</small>
+            </div>
         </div>
         <div class="form-group">
             <label for="guide">Przodownik (opcjonalny)</label>
             <select name="guide" formControlName="guide">
                 <option value="" selected disabled hidden>Wybierz przodownika...</option>
-                <option *ngFor="let trip of trips">
-                    {{trip.id}}
+                <option *ngFor="let guide of guides">
+                    {{guide.login}}
                 </option>
             </select>
         </div>
